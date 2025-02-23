@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   title: "FSW Donalds",
   description: "Bora finalizar esse projeto lindo!",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
