@@ -28,7 +28,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   if (!restaurant) return notFound();
   if (!product) return notFound();
   return (
-    <Card className="relative h-full w-full border-none">
+    <Card className="max-w- relative h-full w-full border-none">
       <CardHeader className="relative h-96 w-full">
         <Image
           src={product.imageUrl}
@@ -38,7 +38,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
           className="z-10"
         />
       </CardHeader>
-      <CardContent className="relative z-20 flex h-full w-full flex-col justify-center gap-2 rounded-t-3xl bg-white pt-6">
+      <CardContent className="z-20 flex h-full w-full flex-col justify-center gap-2 rounded-t-3xl bg-white pt-6">
         <div className="flex items-center gap-2">
           <Image
             src={restaurant.avatarImageUrl}
