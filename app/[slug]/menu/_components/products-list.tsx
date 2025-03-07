@@ -1,5 +1,7 @@
 import { Product } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 
 import { formatCurrency } from "@/app/_untils/currenc";
@@ -15,6 +17,8 @@ const ProductsList = ({ products }: ProductsListProps) => {
   const handleTextHeight = () => {
     setIsTextFull((prevState) => !prevState);
   };
+
+  const { slug } = useParams<{ slug: string }>();
   return (
     <Card>
       {products?.map((product) => (
@@ -25,7 +29,12 @@ const ProductsList = ({ products }: ProductsListProps) => {
           <div className="flex w-full items-center justify-between gap-20">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
-                <h2 className="text-xs font-medium">{product.name}</h2>
+                <Link
+                  href={`/${slug}/menu/${product.id}`}
+                  className="text-xs font-medium"
+                >
+                  {product.name}
+                </Link>
                 <p className="max-w-52 text-xs text-[#000000a0]">
                   {isTextFull
                     ? product.description
@@ -44,12 +53,15 @@ const ProductsList = ({ products }: ProductsListProps) => {
                 {formatCurrency(product.price)}
               </p>
             </div>
-            <Image
-              src={product?.imageUrl || "Image not found"}
-              alt={product?.name || "Image not found"}
-              width={100}
-              height={100}
-            />
+            <Link href={`/${slug}/menu/${product.id}`}>
+              <Image
+                src={product?.imageUrl || "Image not found"}
+                alt={product?.name || "Image not found"}
+                width={100}
+                height={100}
+                className="transition-all hover:scale-110"
+              />
+            </Link>
           </div>
         </CardContent>
       ))}
